@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\FoxIt\\SPaPS\\SPaPS\\SPaPS.csproj": {}
+    "C:\\Задачи\\FoxIt\\SPaPS\\SPaPS\\SPaPS.csproj": {}
   },
   "projects": {
-    "C:\\FoxIt\\SPaPS\\SPaPS\\SPaPS.csproj": {
+    "C:\\Задачи\\FoxIt\\SPaPS\\SPaPS\\SPaPS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\FoxIt\\SPaPS\\SPaPS\\SPaPS.csproj",
+        "projectUniqueName": "C:\\Задачи\\FoxIt\\SPaPS\\SPaPS\\SPaPS.csproj",
         "projectName": "SPaPS",
-        "projectPath": "C:\\FoxIt\\SPaPS\\SPaPS\\SPaPS.csproj",
+        "projectPath": "C:\\Задачи\\FoxIt\\SPaPS\\SPaPS\\SPaPS.csproj",
         "packagesPath": "C:\\Users\\Martina\\.nuget\\packages\\",
-        "outputPath": "C:\\FoxIt\\SPaPS\\SPaPS\\obj\\",
+        "outputPath": "C:\\Задачи\\FoxIt\\SPaPS\\SPaPS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Martina\\AppData\\Roaming\\NuGet\\NuGet.Config",

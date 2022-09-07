@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BTFG92ci/sb1/NdSjYnmpGGyjbtalL6GC+aLiEvwP/9+JTLuLjefHy8im2OEvrKOq4zCSYgOu/0TztSmuFEbBQ==",
+  "dgSpecHash": "nozXFB7MYEuW6/8MTELJ6WQgkFhz9kL8e/AXR72S3mv1YH7Yc5DexDPGGjpYu2nTfmHpPX8zCRsfet1i0irQKQ==",
   "success": true,
-  "projectFilePath": "C:\\FoxIt\\SPaPS\\SPaPS\\SPaPS.csproj",
+  "projectFilePath": "C:\\Задачи\\FoxIt\\SPaPS\\SPaPS\\SPaPS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Martina\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Martina\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
