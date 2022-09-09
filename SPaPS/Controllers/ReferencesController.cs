@@ -34,7 +34,7 @@ namespace SPaPS.Controllers
                 return NotFound();
             }
 
-            var reference = await _context.References
+            Reference reference = await _context.References
                 .Include(r => r.ReferenceType)
                 .FirstOrDefaultAsync(m => m.ReferenceId == id);
             if (reference == null)
@@ -48,7 +48,7 @@ namespace SPaPS.Controllers
         // GET: References/Create
         public IActionResult Create()
         {
-            ViewData["ReferenceTypeId"] = new SelectList(_context.ReferenceTypes, "ReferenceTypeId", "ReferenceTypeId");
+            ViewData["ReferenceType"] = new SelectList(_context.ReferenceTypes.ToList(), "ReferenceTypeId", "Description");
             return View();
         }
 
@@ -77,7 +77,7 @@ namespace SPaPS.Controllers
                 return NotFound();
             }
 
-            var reference = await _context.References.FindAsync(id);
+            Reference reference = await _context.References.FindAsync(id);
             if (reference == null)
             {
                 return NotFound();
@@ -130,7 +130,7 @@ namespace SPaPS.Controllers
                 return NotFound();
             }
 
-            var reference = await _context.References
+            Reference reference = await _context.References
                 .Include(r => r.ReferenceType)
                 .FirstOrDefaultAsync(m => m.ReferenceId == id);
             if (reference == null)
@@ -150,7 +150,7 @@ namespace SPaPS.Controllers
             {
                 return Problem("Entity set 'SPaPSContext.References'  is null.");
             }
-            var reference = await _context.References.FindAsync(id);
+            Reference reference = await _context.References.FindAsync(id);
             if (reference != null)
             {
                 _context.References.Remove(reference);

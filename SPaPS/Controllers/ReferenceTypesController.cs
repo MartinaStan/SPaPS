@@ -35,7 +35,7 @@ namespace SPaPS.Controllers
                 return NotFound();
             }
 
-            var referenceType = await _context.ReferenceTypes
+           ReferenceType referenceType = await _context.ReferenceTypes
                 .FirstOrDefaultAsync(m => m.ReferenceTypeId == id);
             if (referenceType == null)
             {
@@ -74,8 +74,7 @@ namespace SPaPS.Controllers
             {
                 return NotFound();
             }
-
-            var referenceType = await _context.ReferenceTypes.FindAsync(id);
+            ReferenceType referenceType = await _context.ReferenceTypes.FindAsync(id);
             if (referenceType == null)
             {
                 return NotFound();
@@ -126,7 +125,7 @@ namespace SPaPS.Controllers
                 return NotFound();
             }
 
-            var referenceType = await _context.ReferenceTypes
+            ReferenceType referenceType = await _context.ReferenceTypes
                 .FirstOrDefaultAsync(m => m.ReferenceTypeId == id);
             if (referenceType == null)
             {
@@ -145,7 +144,7 @@ namespace SPaPS.Controllers
             {
                 return Problem("Entity set 'SPaPSContext.ReferenceTypes'  is null.");
             }
-            var referenceType = await _context.ReferenceTypes.FindAsync(id);
+            ReferenceType referenceType = await _context.ReferenceTypes.FindAsync(id);
             if (referenceType != null)
             {
                 _context.ReferenceTypes.Remove(referenceType);

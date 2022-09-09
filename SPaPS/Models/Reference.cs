@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace SPaPS.Models
 {
@@ -7,8 +8,11 @@ namespace SPaPS.Models
     {
         public long ReferenceId { get; set; }
         public long ReferenceTypeId { get; set; }
+        [DisplayName("Опис на референца")]
         public string Description { get; set; } = null!;
+        [DisplayName("Код")]
         public string Code { get; set; } = null!;
+
         public DateTime CreatedOn { get; set; }
         public int CreatedBy { get; set; }
         public DateTime? UpdatedOn { get; set; }

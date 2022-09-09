@@ -76,7 +76,7 @@ namespace SPaPS.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Clients.FindAsync(id);
+            Client client = await _context.Clients.FindAsync(id);
             if (client == null)
             {
                 return NotFound();
@@ -127,7 +127,7 @@ namespace SPaPS.Controllers
                 return NotFound();
             }
 
-            var client = await _context.Clients
+            Client client = await _context.Clients
                 .FirstOrDefaultAsync(m => m.ClientId == id);
             if (client == null)
             {
@@ -146,7 +146,7 @@ namespace SPaPS.Controllers
             {
                 return Problem("Entity set 'SPaPSContext.Clients'  is null.");
             }
-            var client = await _context.Clients.FindAsync(id);
+            Client client = await _context.Clients.FindAsync(id);
             if (client != null)
             {
                 _context.Clients.Remove(client);
