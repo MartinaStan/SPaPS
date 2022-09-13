@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,8 +11,10 @@ using SPaPS.Models;
 
 namespace SPaPS.Controllers
 {
+    [Authorize]
     public class ClientsController : Controller
     {
+        
         private readonly SPaPSContext _context;
 
         public ClientsController(SPaPSContext context)
@@ -20,6 +23,8 @@ namespace SPaPS.Controllers
         }
 
         // GET: Clients
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             List<Client> clients = await _context.Clients.ToListAsync()

@@ -20,6 +20,26 @@ namespace SPaPS.Controllers
         }
 
         [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginModel model)
+        {
+           var result = await _signInManager.PasswordSignInAsync(userName: model.Email, password: model.Password, isPersistent:false, lockoutOnFailure:true) ;
+
+            if(!result.Succeeded || result.IsLockedOut || result.IsNotAllowed)
+            {
+                ModelState.AddModelError("Error", "Погрешно корисничко име или лозинка!");
+                return View(model);
+
+            }
+
+            return RedirectToAction(nameof(HomeController.Index), "Home");  
+        }
+
+        [HttpGet]
         public IActionResult Register()
         {
             
@@ -60,6 +80,12 @@ namespace SPaPS.Controllers
 
 
             return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
     }
 }

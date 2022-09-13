@@ -539,3 +539,4 @@ C:\Задачи\FoxIt\SPaPS\SPaPS\obj\Debug\net6.0\SPaPS.pdb
 C:\Задачи\FoxIt\SPaPS\SPaPS\obj\Debug\net6.0\SPaPS.genruntimeconfig.cache
 C:\Задачи\FoxIt\SPaPS\SPaPS\obj\Debug\net6.0\ref\SPaPS.dll
 C:\Задачи\FoxIt\SPaPS\SPaPS\bin\Debug\net6.0\libman.json
+C:\Задачи\FoxIt\SPaPS\SPaPS\bin\Debug\net6.0\Postal.AspNetCore.dll
