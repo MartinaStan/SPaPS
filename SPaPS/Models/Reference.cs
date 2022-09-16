@@ -10,9 +10,7 @@ namespace SPaPS.Models
         public long ReferenceTypeId { get; set; }
         [DisplayName("Опис на референца")]
         public string Description { get; set; } = null!;
-        [DisplayName("Код")]
         public string Code { get; set; } = null!;
-
         public DateTime CreatedOn { get; set; }
         public int CreatedBy { get; set; }
         public DateTime? UpdatedOn { get; set; }

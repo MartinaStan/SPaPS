@@ -14,7 +14,6 @@ namespace SPaPS.Controllers
     [Authorize]
     public class ClientsController : Controller
     {
-        
         private readonly SPaPSContext _context;
 
         public ClientsController(SPaPSContext context)
@@ -23,14 +22,12 @@ namespace SPaPS.Controllers
         }
 
         // GET: Clients
-
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            List<Client> clients = await _context.Clients.ToListAsync()
-;
-            return View(clients);
+            List<Client> clients = await _context.Clients.ToListAsync();
 
+            return View(clients);
         }
 
         // GET: Clients/Details/5
@@ -41,8 +38,8 @@ namespace SPaPS.Controllers
                 return NotFound();
             }
 
-            Client client = await _context.Clients.FirstOrDefaultAsync(m=>m.ClientId == id);
-                
+            Client client = await _context.Clients.FirstOrDefaultAsync(m => m.ClientId == id);
+
             if (client == null)
             {
                 return NotFound();
@@ -62,7 +59,7 @@ namespace SPaPS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ClientId,UserId,ClientTypeId,Name,Address,IdNo,ClientCategoryId,CityId,CountryId,CreatedOn,UpdatedOn")] Client client)
+        public async Task<IActionResult> Create([Bind("ClientId,UserId,ClientTypeId,Name,Address,IdNo,CityId,CountryId,CreatedOn,UpdatedOn")] Client client)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +78,7 @@ namespace SPaPS.Controllers
                 return NotFound();
             }
 
-            Client client = await _context.Clients.FindAsync(id);
+            var client = await _context.Clients.FindAsync(id);
             if (client == null)
             {
                 return NotFound();
@@ -94,7 +91,7 @@ namespace SPaPS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("ClientId,UserId,ClientTypeId,Name,Address,IdNo,ClientCategoryId,CityId,CountryId,CreatedOn,UpdatedOn")] Client client)
+        public async Task<IActionResult> Edit(long id, [Bind("ClientId,UserId,ClientTypeId,Name,Address,IdNo,CityId,CountryId,CreatedOn,UpdatedOn")] Client client)
         {
             if (id != client.ClientId)
             {
@@ -132,7 +129,7 @@ namespace SPaPS.Controllers
                 return NotFound();
             }
 
-            Client client = await _context.Clients
+            var client = await _context.Clients
                 .FirstOrDefaultAsync(m => m.ClientId == id);
             if (client == null)
             {
@@ -151,19 +148,19 @@ namespace SPaPS.Controllers
             {
                 return Problem("Entity set 'SPaPSContext.Clients'  is null.");
             }
-            Client client = await _context.Clients.FindAsync(id);
+            var client = await _context.Clients.FindAsync(id);
             if (client != null)
             {
                 _context.Clients.Remove(client);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ClientExists(long id)
         {
-          return (_context.Clients?.Any(e => e.ClientId == id)).GetValueOrDefault();
+            return (_context.Clients?.Any(e => e.ClientId == id)).GetValueOrDefault();
         }
     }
 }
