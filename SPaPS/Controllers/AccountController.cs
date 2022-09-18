@@ -56,8 +56,16 @@ namespace SPaPS.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register([Bind("Email,PhoneNumber, Name, Address, IdNo, ClientTypeId, CityId,CountryId")]RegisterModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+
+            }
+            
+
             var userExists = await _userManager.FindByEmailAsync(model.Email);
 
             if (userExists != null)
@@ -200,8 +208,14 @@ namespace SPaPS.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
+        public async Task<IActionResult> ChangePassword([Bind("OldPassword, NewPassword, ConfirmPassword")] ChangePasswordModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+
             var loggedInUserEmail = User.Identity.Name;
 
             var user = await _userManager.FindByEmailAsync(loggedInUserEmail);

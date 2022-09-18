@@ -10,17 +10,17 @@
     <form asp-action="Login" method="post">
         <div class="col-12">
             <div class="col-md-3 col-6">
-                <div class="form-floating mb-3">
-                    @Html.ValidationMessageFor(model => model.Email, null, new{ @class = "text -danger"})
+                <div class="form-floating mb-3"> 
                     <input asp-for="Email" type="email" class="form-control" placeholder="Email">
-                    <label asp-for="Email">Е-маил</label>
+                    <label asp-for="Email"></label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-3 col-6">
                 <div class="form-floating mb-3">
-                    @Html.ValidationMessageFor(model => model.Password, null, new{ @class = "text -danger"})
                     <input asp-for="Password" type="password" class="form-control" placeholder="Password">
-                    <label asp-for="Password">Лозинка</label>
+                    <label asp-for="Password"></label>
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
             </div>
             <a asp-action="ForgotPassword" asp-controller="Account">Заборавена лозинка?</a>

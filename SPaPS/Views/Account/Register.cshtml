@@ -8,68 +8,84 @@
 <h2>Регистрирај се</h2>
 <br />
 
-<form asp-action="Register" method="post">
-    <div class="row">
-        <div class="col-md-3 col-6">
-            <div class="form-floating mb-3">
-                @Html.ValidationMessageFor(model => model.Email, null, new{ @class = "text -danger"})
-                <input asp-for="Email" type="email" class="form-control" placeholder="name@example.com" required>
-                <label asp-for="Email">Е-маил</label>
-            </div>
-        </div>
-        <div class="col-md-3 col-6">
-            <div class="form-floating mb-3">
-                 @Html.ValidationMessageFor(model => model.PhoneNumber, null, new{ @class = "text -danger"})
-                <input asp-for="PhoneNumber" type="tel" class="form-control" placeholder="PhoneNumber" required>
-                <label asp-for="PhoneNumber">Телефон</label>
-            </div>
-        </div>
-        <div class="col-md-3 col-6">
-            <div class="form-floating mb-3">
-                @Html.ValidationMessageFor(model => model.Name, null, new{ @class = "text -danger"})
-                <input asp-for="Name" type="text" class="form-control" placeholder="Name"required>
-                <label asp-for="Name">Име и презиме</label>
-            </div>
-        </div>
-        <div class="col-md-3 col-6">
-            <div class="form-floating mb-3">
-                @Html.ValidationMessageFor(model => model.Address, null, new{ @class = "text -danger"})
-                <input asp-for="Address" type="text" class="form-control" placeholder="Address"required>
-                <label asp-for="Address">Адреса</label>
-            </div>
-        </div>
-        <div class="col-md-3 col-6">
-            <div class="form-floating mb-3">
-                @Html.ValidationMessageFor(model => model.IdNo, null, new{ @class = "text -danger"})
-                <input asp-for="IdNo" type="text" class="form-control" placeholder="IdNo" required>
-                <label asp-for="IdNo">Ембг</label>
-            </div>
-        </div>
-        <div class="col-md-3 col-6">
-            <div class="form-floating mb-3">
-                @Html.ValidationMessageFor(model => model.ClientTypeId, null, new{ @class = "text -danger"})
-                <input asp-for="ClientTypeId" type="text" class="form-control" placeholder="ClientTypeId" required>
-                <label asp-for="ClientTypeId">Тип на корисник</label>
-            </div>
-        </div>
-        <div class="col-md-3 col-6">
-            <div class="form-floating mb-3">
-                @Html.ValidationMessageFor(model => model.CityId, null, new{ @class = "text -danger"})
-                <input asp-for="CityId" type="text" class="form-control" placeholder="CityId" required>
-                <label asp-for="CityId">Град</label>
-            </div>
-        </div>
-        <div class="col-md-3 col-6">
-            <div class="form-floating mb-3">
-                @Html.ValidationMessageFor(model => model.CountryId, null, new{ @class = "text -danger"})
-                <input asp-for="CountryId" type="text" class="form-control" placeholder="CountryId" required>
-                <label asp-for="CountryId">Држава</label>
-            </div>
-        </div>
-    </div>
+  
+ <form asp-action="Register" method="post">
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+     <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-3 col-6">
+            
+                <div class="form-floating mb-3">
+                    <input asp-for="Email" type="email" class="form-control" placeholder="name@example.com"> 
+                    <label asp-for="Email"></label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                   
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="form-floating mb-3">
+                    <input asp-for="PhoneNumber" type="tel" class="form-control" placeholder="PhoneNumber">
+                    <label asp-for="PhoneNumber"></label>
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="form-floating mb-3">
+                    <input asp-for="Name" type="text" class="form-control" placeholder="Name" >
+                    <label asp-for="Name"></label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="form-floating mb-3">
+                    <input asp-for="Address" type="text" class="form-control" placeholder="Address" >
+                    <label asp-for="Address"></label>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="form-floating mb-3">
+                    <input asp-for="IdNo" type="text" class="form-control" placeholder="IdNo" >
+                    <label asp-for="IdNo"></label>
+                    <span asp-validation-for="IdNo" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="form-floating mb-3">
+                    @*<input asp-for="ClientTypeId" type="text" class="form-control" placeholder="ClientTypeId" >*@
+                    <label asp-for="ClientTypeId"></label>
+                    <select asp-for="ClientTypeId" class="form-control" >
+                        <option></option>
+                    </select>
+                    <span asp-validation-for="ClientTypeId" class="text-danger"></span>
+                    
+                   
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="form-floating mb-3">      
+                    @*<input asp-for="CityId" type="text" class="form-control" placeholder="CityId" >*@
+                    <label asp-for="CityId"></label>
+                    <select asp-for="CityId" class="form-control">
+                        <option></option>
+                    </select>
+                    <span asp-validation-for="CityId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="form-floating mb-3">                 
+                    @*<input asp-for="CountryId" type="text" class="form-control" placeholder="CountryId" >*@
+                    <label asp-for="CountryId"></label>
+                    <select asp-for="CountryId" class="form-control">
+                    <option selected>Македонија</option>
+                    </select>
+                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
 <p class="col-12 text-center text-danger">@Html.ValidationMessage("Error")</p>
 <h4 class="col-12 text-center text-success">@Html.ValidationMessage("Success")</h4>
