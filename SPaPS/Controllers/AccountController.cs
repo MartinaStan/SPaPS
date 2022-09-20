@@ -38,6 +38,11 @@ namespace SPaPS.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+
+            }
             var result = await _signInManager.PasswordSignInAsync(userName: model.Email, password: model.Password, isPersistent: false, lockoutOnFailure: true);
 
             if (!result.Succeeded || result.IsLockedOut || result.IsNotAllowed)
@@ -56,8 +61,8 @@ namespace SPaPS.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("Email,PhoneNumber, Name, Address, IdNo, ClientTypeId, CityId,CountryId")]RegisterModel model)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -143,6 +148,11 @@ namespace SPaPS.Controllers
 
         public async Task<IActionResult> ForgotPassword(ForgotPasswordModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+
+            }
             var user = await _userManager.FindByEmailAsync(model.Email);
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -183,7 +193,11 @@ namespace SPaPS.Controllers
         [HttpPost]
         public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
 
+            }
             var user = await _userManager.FindByEmailAsync(model.Email);
 
             var resetPassword = await _userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
@@ -208,11 +222,12 @@ namespace SPaPS.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> ChangePassword([Bind("OldPassword, NewPassword, ConfirmPassword")] ChangePasswordModel model)
+        public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View();
+
             }
 
 
