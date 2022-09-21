@@ -6,6 +6,8 @@ using SPaPS.Data;
 using DataAccess.Services;
 using SPaPS.Helpers;
 using Microsoft.AspNetCore.Authorization;
+using NuGet.Common;
+using Postal;
 
 namespace SPaPS.Controllers
 {
@@ -69,7 +71,6 @@ namespace SPaPS.Controllers
                 return View();
 
             }
-            
 
             var userExists = await _userManager.FindByEmailAsync(model.Email);
 
@@ -229,6 +230,7 @@ namespace SPaPS.Controllers
                 return View();
 
             }
+             return RedirectToAction(nameof(Login));
 
 
             var loggedInUserEmail = User.Identity.Name;
@@ -247,6 +249,30 @@ namespace SPaPS.Controllers
 
             return View();
         }
+
+        [HttpGet]
+
+        public async Task<IActionResult> EditProfileInfo()
+        {
+            
+            return View();
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditProfileInfo(EditProfileInfoModel model)
+        {
+            var loggedInUserEmail = User.Identity.Name;
+
+            var user = await _userManager.FindByEmailAsync(loggedInUserEmail);
+
+            var editProfileInfo = await _userManager.UpdateAsync(user);
+
+            
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+            
+
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> LogOut()

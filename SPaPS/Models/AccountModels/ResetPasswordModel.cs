@@ -7,9 +7,11 @@ namespace SPaPS.Models.AccountModels
         public string Email { get; set; } = string.Empty;
         public string Token { get; set; } = string.Empty;
 
+        [Display(Name ="Нова лозинка")]
         [Required(ErrorMessage = "Полето е задолжително")]
         public string NewPassword { get; set; } = string.Empty;
 
+        [Display(Name = "Потврди лозинка")]
         [Required(ErrorMessage = "Полето е задолжително")]
         [Compare("NewPassword", ErrorMessage = "Лозинките не се совпаѓаат")]
         public string ConfirmPassword { get; set; } = string.Empty;
