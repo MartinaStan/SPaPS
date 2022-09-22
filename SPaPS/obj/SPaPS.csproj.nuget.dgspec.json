@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Задачи\\FoxIt\\SPaPS\\SPaPS\\SPaPS.csproj": {}
+    "C:\\FoxIt\\Nova verzija\\SPaPS\\SPaPS\\SPaPS.csproj": {}
   },
   "projects": {
-    "C:\\Задачи\\FoxIt\\SPaPS\\SPaPS\\SPaPS.csproj": {
+    "C:\\FoxIt\\Nova verzija\\SPaPS\\SPaPS\\SPaPS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Задачи\\FoxIt\\SPaPS\\SPaPS\\SPaPS.csproj",
+        "projectUniqueName": "C:\\FoxIt\\Nova verzija\\SPaPS\\SPaPS\\SPaPS.csproj",
         "projectName": "SPaPS",
-        "projectPath": "C:\\Задачи\\FoxIt\\SPaPS\\SPaPS\\SPaPS.csproj",
+        "projectPath": "C:\\FoxIt\\Nova verzija\\SPaPS\\SPaPS\\SPaPS.csproj",
         "packagesPath": "C:\\Users\\Martina\\.nuget\\packages\\",
-        "outputPath": "C:\\Задачи\\FoxIt\\SPaPS\\SPaPS\\obj\\",
+        "outputPath": "C:\\FoxIt\\Nova verzija\\SPaPS\\SPaPS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Martina\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -42,27 +42,29 @@
           "dependencies": {
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[6.0.8, )"
+              "version": "[6.0.9, )"
             },
             "PasswordGenerator": {
               "target": "Package",

@@ -12,6 +12,15 @@
  <form asp-action="Register" method="post">
      <div class="row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-md-3 col-6">
+            <div class="form-floating mb-3">  
+                    <select asp-for="Role" asp-items="@ViewBag.Roles" class="form-select">
+                        <option value="">-- Избери --</option>
+                    </select>
+                    <label asp-for="Role"></label>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+        </div>
             <div class="col-md-3 col-6">
                 <div class="form-floating mb-3">
                     <input asp-for="Email" type="email" class="form-control" placeholder="name@example.com"> 
@@ -50,11 +59,10 @@
             </div>
             <div class="col-md-3 col-6">
                 <div class="form-floating mb-3">
-                    @*<input asp-for="ClientTypeId" type="text" class="form-control" placeholder="ClientTypeId" >*@
-                    <label asp-for="ClientTypeId"></label>
-                    <select asp-for="ClientTypeId" class="form-control" >
-                       <option value="1"> </option>
+                    <select asp-for="ClientTypeId" asp-items="@ViewBag.ClientTypes" class="form-select">
+                    <option value="">-- Избери --</option>
                     </select>
+                   <label asp-for="ClientTypeId"></label>
                     <span asp-validation-for="ClientTypeId" class="text-danger"></span>
                     
                    
@@ -62,21 +70,19 @@
             </div>
             <div class="col-md-3 col-6">
                 <div class="form-floating mb-3">      
-                    @*<input asp-for="CityId" type="text" class="form-control" placeholder="CityId" >*@
-                    <label asp-for="CityId"></label>
-                    <select asp-for="CityId" class="form-control">
-                        <option value="1"> </option>
+                    <select asp-for="CityId" asp-items="@ViewBag.Cities" class="form-select">
+                    <option value="">-- Избери --</option>
                     </select>
+                    <label asp-for="CityId"></label>
                     <span asp-validation-for="CityId" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-3 col-6">
                 <div class="form-floating mb-3">                 
-                    @*<input asp-for="CountryId" type="text" class="form-control" placeholder="CountryId" >*@
-                    <label asp-for="CountryId"></label>
-                    <select asp-for="CountryId" class="form-control">
-                    <option value="1">Македонија</option>
+                    <select asp-for="CountryId" asp-items="@ViewBag.Countries" class="form-select">
+                    <option value="">-- Избери --</option>
                     </select>
+                    <label asp-for="CountryId"></label>
                     <span asp-validation-for="CountryId" class="text-danger"></span>
                 </div>
             </div>

@@ -8,6 +8,8 @@ using SPaPS.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using NuGet.Common;
 using Postal;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace SPaPS.Controllers
 {
@@ -15,13 +17,15 @@ namespace SPaPS.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SPaPSContext _context;
         private readonly IEmailSenderEnhance _emailService;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, SPaPSContext context, IEmailSenderEnhance emailService)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager, SPaPSContext context, IEmailSenderEnhance emailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _context = context;
             _emailService = emailService;
         }
@@ -59,6 +63,10 @@ namespace SPaPS.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            ViewBag.ClientTypes = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 1).ToList(), "ReferenceId", "Description");
+            ViewBag.Cities = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 3).ToList(), "ReferenceId", "Description");
+            ViewBag.Countries = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 4).ToList(), "ReferenceId", "Description");
+            ViewBag.Roles = new SelectList(_roleManager.Roles.ToList(), "Name", "Name");
             return View();
         }
 
@@ -97,6 +105,8 @@ namespace SPaPS.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+
+            await _userManager.AddToRoleAsync(user, model.Role);
 
             Client client = new Client()
             {
@@ -250,27 +260,89 @@ namespace SPaPS.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpGet]
-
         public async Task<IActionResult> EditProfileInfo()
-        {
-            
-            return View();
-
-        }
-        [HttpPost]
-        public async Task<IActionResult> EditProfileInfo(EditProfileInfoModel model)
         {
             var loggedInUserEmail = User.Identity.Name;
 
-            var user = await _userManager.FindByEmailAsync(loggedInUserEmail);
+            var appUser = await _userManager.FindByEmailAsync(loggedInUserEmail);
+            var clientUser = await _context.Clients.Where(x => x.UserId == appUser.Id).FirstOrDefaultAsync();
 
-            var editProfileInfo = await _userManager.UpdateAsync(user);
+            ViewBag.ClientTypes = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 1).ToList(), "ReferenceId", "Description");
+            ViewBag.Cities = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 3).ToList(), "ReferenceId", "Description");
+            ViewBag.Countries = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 4).ToList(), "ReferenceId", "Description");
 
-            
-            return RedirectToAction(nameof(HomeController.Index), "Home");
-            
+            EditProfileInfoModel model = new EditProfileInfoModel()
+            {
+                Name = clientUser.Name,
+                Address = clientUser.Address,
+                CityId = clientUser.CityId,
+                CountryId = clientUser.CountryId,
+                ClientTypeId = clientUser.ClientTypeId,
+                IdNo = clientUser.IdNo,
+                PhoneNumber = appUser.PhoneNumber
+            };
 
+            return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> EditProfileInfo(EditProfileInfoModel model)
+        {
+            ViewBag.ClientTypes = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 1).ToList(), "ReferenceId", "Description");
+            ViewBag.Cities = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 3).ToList(), "ReferenceId", "Description");
+            ViewBag.Countries = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 4).ToList(), "ReferenceId", "Description");
+
+
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("Error", "Се случи грешка. Обидете се повторно.");
+
+                return View(model);
+            }
+
+            var loggedInUserEmail = User.Identity.Name;
+
+            var appUser = await _userManager.FindByEmailAsync(loggedInUserEmail);
+            var clientUser = await _context.Clients.Where(x => x.UserId == appUser.Id).FirstOrDefaultAsync();
+
+            appUser.PhoneNumber = model.PhoneNumber;
+
+            var appUserResult = await _userManager.UpdateAsync(appUser);
+
+            if (!appUserResult.Succeeded)
+            {
+                ModelState.AddModelError("Error", "Се случи грешка. Обидете се повторно.");
+
+                return View(model);
+            }
+
+            clientUser.Address = model.Address;
+            clientUser.Name = model.Name;
+            clientUser.CityId = model.CityId;
+            clientUser.CountryId = model.CountryId;
+            clientUser.ClientTypeId = model.ClientTypeId;
+            clientUser.IdNo = model.IdNo;
+            clientUser.UpdatedOn = DateTime.Now;
+
+            try
+            {
+                _context.Clients.Update(clientUser);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                ModelState.AddModelError("Error", "Се случи грешка. Обидете се повторно.");
+
+                return View(model);
+            }
+
+
+            ModelState.AddModelError("Success", "Успешно променети информации");
+
+            return View(model);
         }
 
 

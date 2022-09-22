@@ -5,6 +5,10 @@ namespace SPaPS.Models.AccountModels
 {
     public class RegisterModel
     {
+        [Required(ErrorMessage = "Полето е задолжително")]
+        [DisplayName("Улога")]
+        public string? Role { get; set; }
+
         [Required(ErrorMessage ="Полето е задолжително")]
         [DisplayName ("Е-маил")]
         public string? Email { get; set; }
