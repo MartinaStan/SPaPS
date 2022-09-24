@@ -38,7 +38,7 @@ namespace SPaPS.Models.AccountModels
         public int CityId { get; set; }
 
         [Required(ErrorMessage = "Полето е задолжително")]
-        [DisplayName(" ")]
+        [DisplayName("Држава")]
         public int? CountryId { get; set; }
     }
 }

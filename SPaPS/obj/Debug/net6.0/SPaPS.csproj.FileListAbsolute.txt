@@ -286,7 +286,6 @@ C:\Задачи\FoxIt\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.AspNetCore.Identity
 C:\Задачи\FoxIt\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
 C:\Задачи\FoxIt\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.AspNetCore.Razor.Language.dll
 C:\Задачи\FoxIt\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Задачи\FoxIt\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.Build.Locator.dll
 C:\Задачи\FoxIt\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.CodeAnalysis.AnalyzerUtilities.dll
 C:\Задачи\FoxIt\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
 C:\Задачи\FoxIt\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
@@ -560,7 +559,6 @@ C:\FoxIt\Nova verzija\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.AspNetCore.Identity
 C:\FoxIt\Nova verzija\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
 C:\FoxIt\Nova verzija\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.AspNetCore.Razor.Language.dll
 C:\FoxIt\Nova verzija\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
-C:\FoxIt\Nova verzija\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.Build.Locator.dll
 C:\FoxIt\Nova verzija\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.CodeAnalysis.AnalyzerUtilities.dll
 C:\FoxIt\Nova verzija\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.CodeAnalysis.dll
 C:\FoxIt\Nova verzija\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
@@ -814,3 +812,9 @@ C:\FoxIt\Nova verzija\SPaPS\SPaPS\obj\Debug\net6.0\refint\SPaPS.dll
 C:\FoxIt\Nova verzija\SPaPS\SPaPS\obj\Debug\net6.0\SPaPS.pdb
 C:\FoxIt\Nova verzija\SPaPS\SPaPS\obj\Debug\net6.0\SPaPS.genruntimeconfig.cache
 C:\FoxIt\Nova verzija\SPaPS\SPaPS\obj\Debug\net6.0\ref\SPaPS.dll
+C:\FoxIt\Nova verzija\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.Build.dll
+C:\FoxIt\Nova verzija\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.Build.Framework.dll
+C:\FoxIt\Nova verzija\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.NET.StringTools.dll
+C:\Задачи\FoxIt\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.Build.dll
+C:\Задачи\FoxIt\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.Build.Framework.dll
+C:\Задачи\FoxIt\SPaPS\SPaPS\bin\Debug\net6.0\Microsoft.NET.StringTools.dll
