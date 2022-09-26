@@ -241,7 +241,7 @@ namespace SPaPS.Controllers
                 return View();
 
             }
-             return RedirectToAction(nameof(Login));
+            return RedirectToAction(nameof(Login));
 
 
             var loggedInUserEmail = User.Identity.Name;

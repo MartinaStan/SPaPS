@@ -9,16 +9,19 @@
 
 <form asp-action="EditProfileInfo" method="post">
     <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="col-md-3 col-6">
             <div class="form-floating mb-3">
                 <input asp-for="Name" type="text" class="form-control" placeholder="Name">
                 <label asp-for="Name"></label>
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-3 col-6">
             <div class="form-floating mb-3">
                 <input asp-for="IdNo" type="number" class="form-control" placeholder="IdNo">
                 <label asp-for="IdNo"></label>
+                <span asp-validation-for="IdNo" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-3 col-6">
@@ -27,18 +30,22 @@
                     <option value="">-- Избери --</option>
                 </select>
                 <label asp-for="ClientTypeId"></label>
+                <span asp-validation-for="ClientTypeId" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-3 col-6">
             <div class="form-floating mb-3">
                 <input asp-for="PhoneNumber" type="tel" class="form-control" placeholder="PhoneNumber">
                 <label asp-for="PhoneNumber"></label>
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                
             </div>
         </div>
         <div class="col-md-3 col-6">
             <div class="form-floating mb-3">
                 <input asp-for="Address" type="text" class="form-control" placeholder="Address">
                 <label asp-for="Address"></label>
+                <span asp-validation-for="Address" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-3 col-6">
@@ -47,6 +54,7 @@
                     <option value="">-- Избери --</option>
                 </select>
                 <label asp-for="CityId"></label>
+                <span asp-validation-for="CityId" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-3 col-6">
@@ -55,6 +63,7 @@
                     <option value="">-- Избери --</option>
                 </select>
                 <label asp-for="CountryId"></label>
+                <span asp-validation-for="CountryId" class="text-danger"></span>
             </div>
         </div>
     </div>
