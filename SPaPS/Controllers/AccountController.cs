@@ -66,8 +66,8 @@ namespace SPaPS.Controllers
             ViewBag.ClientTypes = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 1).ToList(), "ReferenceId", "Description");
             ViewBag.Cities = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 3).ToList(), "ReferenceId", "Description");
             ViewBag.Countries = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 4).ToList(), "ReferenceId", "Description");
-            ViewBag.Roles = new SelectList(_roleManager.Roles.ToList(), "Name", "Name");
-
+            ViewBag.Roles = new SelectList(_roleManager.Roles.ToList(), "Name", "Name"); 
+            ViewBag.Activities = new SelectList(_context.Activities.ToList(), "Name", "Name");
             return View();
         }
 
@@ -117,7 +117,8 @@ namespace SPaPS.Controllers
                 IdNo = model.IdNo,
                 ClientTypeId = model.ClientTypeId,
                 CityId = model.CityId,
-                CountryId = model.CountryId
+                CountryId = model.CountryId,
+                
             };
 
             await _context.Clients.AddAsync(client);

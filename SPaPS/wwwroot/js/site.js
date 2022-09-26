@@ -3,4 +3,36 @@
 		allowClear: true,
 		theme: 'bootstrap-5'
 	});
+
+
+	let roleInput = document.querySelector("#Role");
+	let noOfEmpInput = document.querySelector(".NoOfEmployees");
+	let dateOfEstInput = document.querySelector(".DateOfEstablishment");
+	let activitiesInput = document.querySelector(".Activities");
+
+	roleInput.addEventListener("change", function () {
+		if (roleInput.value == "Изведувач") {
+			noOfEmpInput.classList.remove("d-none");
+			dateOfEstInput.classList.remove("d-none");
+			activitiesInput.classList.remove("d-none");
+		}
+		else {
+			noOfEmpInput.classList.add("d-none")
+			dateOfEstInput.classList.add("d-none")
+			activitiesInput.classList.add("d-none")
+
+			document.querySelector("#NoOfEmployees").value = null;
+			document.querySelector("#DateOfEstablishment").value = null;
+			document.querySelector("#Activities").value = null;
+		}
+	})
 });
+//$(function () {
+//	var date = new Date();
+//	var currentMonth = date.getMonth();
+//	var currentDate = date.getDate();
+//	var currentYear = date.getFullYear();
+//	$('#datepicker').datepicker({
+//		maxDate: new Date(currentYear, currentMonth, currentDate)
+//	});
+//});
