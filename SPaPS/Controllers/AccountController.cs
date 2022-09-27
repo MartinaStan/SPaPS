@@ -67,7 +67,7 @@ namespace SPaPS.Controllers
             ViewBag.Cities = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 3).ToList(), "ReferenceId", "Description");
             ViewBag.Countries = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 4).ToList(), "ReferenceId", "Description");
             ViewBag.Roles = new SelectList(_roleManager.Roles.ToList(), "Name", "Name"); 
-            ViewBag.Activities = new SelectList(_context.Activities.ToList(), "Name", "Name");
+            ViewBag.Activities = new SelectList(_context.Activities.ToList(), "ActivityId", "Name");
             return View();
         }
 
@@ -118,6 +118,8 @@ namespace SPaPS.Controllers
                 ClientTypeId = model.ClientTypeId,
                 CityId = model.CityId,
                 CountryId = model.CountryId,
+                NoOfEmployees=model.NoOfEmployees,
+                DateEstablished=model.DateOfEstablishment
                 
             };
 
