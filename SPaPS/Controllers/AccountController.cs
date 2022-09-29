@@ -122,9 +122,18 @@ namespace SPaPS.Controllers
                 DateEstablished=model.DateOfEstablishment
                 
             };
-
             await _context.Clients.AddAsync(client);
             await _context.SaveChangesAsync();
+
+            //ClientActivity clientActivity = new ClientActivity()
+            //{
+            //    ActivityId=model.Activities,
+  
+            //};
+            //await _context.ClientActivities.AddAsync(clientActivity);
+            //await _context.SaveChangesAsync();
+
+
 
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
@@ -272,10 +281,13 @@ namespace SPaPS.Controllers
 
             var appUser = await _userManager.FindByEmailAsync(loggedInUserEmail);
             var clientUser = await _context.Clients.Where(x => x.UserId == appUser.Id).FirstOrDefaultAsync();
+            //var activity = await _context.Activities.Where(x => x.ActivityId ==  ).FirstOrDefault();
+
 
             ViewBag.ClientTypes = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 1).ToList(), "ReferenceId", "Description");
             ViewBag.Cities = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 3).ToList(), "ReferenceId", "Description");
             ViewBag.Countries = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 4).ToList(), "ReferenceId", "Description");
+            ViewBag.Activities = new SelectList(_context.Activities.ToList(), "Name", "Name");
 
             EditProfileInfoModel model = new EditProfileInfoModel()
             {
@@ -285,7 +297,10 @@ namespace SPaPS.Controllers
                 CountryId = clientUser.CountryId,
                 ClientTypeId = clientUser.ClientTypeId,
                 IdNo = clientUser.IdNo,
-                PhoneNumber = appUser.PhoneNumber
+                PhoneNumber = appUser.PhoneNumber,
+                NoOfEmployees= clientUser.NoOfEmployees,
+                DateOfEstablishment = clientUser.DateEstablished,
+                //Activities=activity.Activities
             };
 
             return View(model);
@@ -298,6 +313,7 @@ namespace SPaPS.Controllers
             ViewBag.ClientTypes = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 1).ToList(), "ReferenceId", "Description");
             ViewBag.Cities = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 3).ToList(), "ReferenceId", "Description");
             ViewBag.Countries = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 4).ToList(), "ReferenceId", "Description");
+            ViewBag.Activities = new SelectList(_context.Activities.ToList(), "Name", "Name");
 
 
             if (!ModelState.IsValid)
@@ -330,6 +346,8 @@ namespace SPaPS.Controllers
             clientUser.ClientTypeId = model.ClientTypeId;
             clientUser.IdNo = model.IdNo;
             clientUser.UpdatedOn = DateTime.Now;
+            clientUser.NoOfEmployees = model.NoOfEmployees;
+            clientUser.DateEstablished = model.DateOfEstablishment;
 
             try
             {

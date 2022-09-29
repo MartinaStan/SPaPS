@@ -27,12 +27,37 @@
 		}
 	})
 });
+
+var form = document.querySelector("#register");
+var noOfEmpInput = document.querySelector(".NoOfEmployees");
+var dateOfEstInput = document.querySelector(".DateOfEstablishment");
+var activitiesInput = document.querySelector(".Activities");
+
+
+document.addEventListener('DOMContentLoaded', () => {
+	form.addEventListener('submit', function (e) {
+
+		if (noOfEmpInput.value == null || dateOfEstInput.value == null || activitiesInput.value == null) {
+			/*e.preventDefault()*/
+			alert("Полето е задолжително")
+			
+			return false;
+		}
+		else {
+			return true;
+		}
+	})
+});
+
+
+	
+
 //$(function () {
 //	var date = new Date();
 //	var currentMonth = date.getMonth();
 //	var currentDate = date.getDate();
 //	var currentYear = date.getFullYear();
-//	$('#datepicker').datepicker({
+//	$('.DateOfEstablishment').datepicker({
 //		maxDate: new Date(currentYear, currentMonth, currentDate)
 //	});
 //});

@@ -121,6 +121,8 @@ namespace SPaPS.Controllers
         // GET: Services/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
+            ViewBag.ServiceActivities = new SelectList(_context.Activities.ToList(), "ActivityId", "Description");
+
             if (id == null || _context.Services == null)
             {
                 return NotFound();

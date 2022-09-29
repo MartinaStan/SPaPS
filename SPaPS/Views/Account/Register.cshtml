@@ -9,7 +9,7 @@
 <br />
 
   
- <form asp-action="Register" method="post">
+ <form asp-action="Register" id="register" method="post">
      <div class="row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="col-md-3 col-6">
@@ -86,7 +86,7 @@
             </div>
             <div class="col-md-3 col-6 Activities d-none">
                 <div class="form-floating mb-3">
-                     <select asp-for="Activities" asp-items="@ViewBag.Activities" class="form-select">
+                     <select asp-for="Activities" asp-items="@ViewBag.Activities" class="form-select" >
                          <option value="">-- Избери --</option>
                      </select>
                      <label asp-for="Activities"></label>
@@ -95,16 +95,17 @@
             </div>
             <div class="col-md-3 col-6 NoOfEmployees d-none">
                 <div class="form-floating mb-3">
-                    <input asp-for="NoOfEmployees" type="number" class="form-control" placeholder="NoOfEmployees">
+                    <input asp-for="NoOfEmployees" type="number" class="form-control" placeholder="NoOfEmployees" >
                     <label asp-for="NoOfEmployees"></label>
-                <span asp-validation-for="NoOfEmployees" class="text-danger"></span>
+                  <span asp-validation-for="NoOfEmployees" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-3 col-6 DateOfEstablishment d-none">
                 <div class="form-floating mb-3">
-                   <input asp-for="DateOfEstablishment" type="date" class="form-control" placeholder="DateOfEstablishment">
+                <input asp-for="DateOfEstablishment" type="date" class="form-control"  placeholder="DateOfEstablishment" >
                    <label asp-for="DateOfEstablishment"></label>
                    <span asp-validation-for="DateOfEstablishment" class="text-danger"></span>
+                   @*<span class=" spnValidation"> </span>*@
                 </div>
             </div>
         </div>
