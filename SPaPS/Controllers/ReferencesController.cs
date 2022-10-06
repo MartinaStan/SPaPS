@@ -48,7 +48,7 @@ namespace SPaPS.Controllers
         // GET: References/Create
         public IActionResult Create()
         {
-            ViewData["ReferenceType"] = new SelectList(_context.ReferenceTypes.ToList(), "ReferenceTypeId", "Description");
+            ViewData["ReferenceTypes"] = new SelectList(_context.ReferenceTypes.ToList(), "ReferenceTypeId", "Description");
             return View();
         }
 

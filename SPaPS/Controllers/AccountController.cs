@@ -280,17 +280,21 @@ namespace SPaPS.Controllers
             var loggedInUserEmail = User.Identity.Name;
 
             var appUser = await _userManager.FindByEmailAsync(loggedInUserEmail);
+            var userRole = await _userManager.GetRolesAsync(appUser);
             var clientUser = await _context.Clients.Where(x => x.UserId == appUser.Id).FirstOrDefaultAsync();
-            //var activity = await _context.Activities.Where(x => x.ActivityId ==  ).FirstOrDefault();
+            var activity = await _context.ClientActivities.Where(a => a.ClientId == clientUser.ClientId).Select(x => x.ActivityId).ToListAsync();
 
 
             ViewBag.ClientTypes = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 1).ToList(), "ReferenceId", "Description");
             ViewBag.Cities = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 3).ToList(), "ReferenceId", "Description");
             ViewBag.Countries = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 4).ToList(), "ReferenceId", "Description");
-            ViewBag.Activities = new SelectList(_context.Activities.ToList(), "Name", "Name");
+            ViewBag.Activities = new SelectList(_context.Activities.ToList(), "ActivityId", "Name");
+
+
 
             EditProfileInfoModel model = new EditProfileInfoModel()
             {
+                Role = String.Join(", ", userRole),
                 Name = clientUser.Name,
                 Address = clientUser.Address,
                 CityId = clientUser.CityId,
@@ -300,7 +304,7 @@ namespace SPaPS.Controllers
                 PhoneNumber = appUser.PhoneNumber,
                 NoOfEmployees= clientUser.NoOfEmployees,
                 DateOfEstablishment = clientUser.DateEstablished,
-                //Activities=activity.Activities
+                Activities = activity
             };
 
             return View(model);
@@ -313,7 +317,7 @@ namespace SPaPS.Controllers
             ViewBag.ClientTypes = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 1).ToList(), "ReferenceId", "Description");
             ViewBag.Cities = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 3).ToList(), "ReferenceId", "Description");
             ViewBag.Countries = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 4).ToList(), "ReferenceId", "Description");
-            ViewBag.Activities = new SelectList(_context.Activities.ToList(), "Name", "Name");
+            ViewBag.Activities = new SelectList(_context.Activities.ToList(), "ActivityId", "Name");
 
 
             if (!ModelState.IsValid)
@@ -327,11 +331,13 @@ namespace SPaPS.Controllers
 
             var appUser = await _userManager.FindByEmailAsync(loggedInUserEmail);
             var clientUser = await _context.Clients.Where(x => x.UserId == appUser.Id).FirstOrDefaultAsync();
+            var activity = await _context.ClientActivities.Where(a => a.ClientId == clientUser.ClientId).Select(x => x.ActivityId).ToListAsync();
 
             appUser.PhoneNumber = model.PhoneNumber;
+            activity = model.Activities;
 
             var appUserResult = await _userManager.UpdateAsync(appUser);
-
+            //var activityS =  _context.Update(clientUser);
             if (!appUserResult.Succeeded)
             {
                 ModelState.AddModelError("Error", "Се случи грешка. Обидете се повторно.");
@@ -348,6 +354,8 @@ namespace SPaPS.Controllers
             clientUser.UpdatedOn = DateTime.Now;
             clientUser.NoOfEmployees = model.NoOfEmployees;
             clientUser.DateEstablished = model.DateOfEstablishment;
+            //activity = model.Activities;
+            
 
             try
             {

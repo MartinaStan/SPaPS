@@ -6,6 +6,8 @@ namespace SPaPS.Models.AccountModels
 {
     public class EditProfileInfoModel
     {
+        public string Role { get; set; }
+
         [Required(ErrorMessage = "Полето е задолжително")]
         [DisplayName("Телефон")]
         public string? PhoneNumber { get; set; }
@@ -36,7 +38,7 @@ namespace SPaPS.Models.AccountModels
 
         //[Required(ErrorMessage = "Полето е задолжително")]
         [DisplayName("Активности")]
-        public int Activities { get; set; }
+        public List<long> Activities { get; set; }
 
         //[Required(ErrorMessage = "Полето е задолжително")]
         [DisplayName("Број на вработени")]

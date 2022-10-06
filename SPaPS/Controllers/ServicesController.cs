@@ -12,7 +12,7 @@ using SPaPS.Models.CustomModels;
 
 namespace SPaPS.Controllers
 {
-    [Authorize(Roles = "Админ")]
+    //[Authorize(Roles = "Админ")]
     public class ServicesController : Controller
     {
         private readonly SPaPSContext _context;
@@ -121,14 +121,16 @@ namespace SPaPS.Controllers
         // GET: Services/Edit/5
         public async Task<IActionResult> Edit(long? id)
         {
-            ViewBag.ServiceActivities = new SelectList(_context.Activities.ToList(), "ActivityId", "Description");
+            var service = await _context.Services.FindAsync(id);
+            var serviceActivities =  await _context.ServiceActivities.Where(x => x.ServiceId == service.ServiceId).Select(x => x.ActivityId).ToListAsync();
+            ViewBag.ServiceActivities = new SelectList(_context.ServiceActivities.ToList(), "ActivityId", "Description");
 
             if (id == null || _context.Services == null)
             {
                 return NotFound();
             }
 
-            var service = await _context.Services.FindAsync(id);
+            
             if (service == null)
             {
                 return NotFound();
@@ -143,6 +145,7 @@ namespace SPaPS.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(long id, [Bind("ServiceId,Description,CreatedOn,CreatedBy,UpdatedOn,UpdatedBy,IsActive")] Service service)
         {
+            var serviceActivities = await _context.ServiceActivities.Where(x => x.ServiceId == service.ServiceId).Select(x => x.ActivityId).ToListAsync();
             if (id != service.ServiceId)
             {
                 return NotFound();
@@ -150,9 +153,11 @@ namespace SPaPS.Controllers
 
             if (ModelState.IsValid)
             {
+
                 try
                 {
                     _context.Update(service);
+                    _context.Update(serviceActivities);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
