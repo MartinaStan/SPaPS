@@ -10,6 +10,7 @@ using NuGet.Common;
 using Postal;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace SPaPS.Controllers
 {
@@ -319,7 +320,7 @@ namespace SPaPS.Controllers
             ViewBag.Countries = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 4).ToList(), "ReferenceId", "Description");
             ViewBag.Activities = new SelectList(_context.Activities.ToList(), "ActivityId", "Name");
 
-
+           
             if (!ModelState.IsValid)
             {
                 ModelState.AddModelError("Error", "Се случи грешка. Обидете се повторно.");
@@ -331,10 +332,12 @@ namespace SPaPS.Controllers
 
             var appUser = await _userManager.FindByEmailAsync(loggedInUserEmail);
             var clientUser = await _context.Clients.Where(x => x.UserId == appUser.Id).FirstOrDefaultAsync();
+            var userRole = await _userManager.GetRolesAsync(appUser);
             var activity = await _context.ClientActivities.Where(a => a.ClientId == clientUser.ClientId).Select(x => x.ActivityId).ToListAsync();
 
             appUser.PhoneNumber = model.PhoneNumber;
             activity = model.Activities;
+            
 
             var appUserResult = await _userManager.UpdateAsync(appUser);
             //var activityS =  _context.Update(clientUser);
@@ -344,6 +347,7 @@ namespace SPaPS.Controllers
 
                 return View(model);
             }
+
 
             clientUser.Address = model.Address;
             clientUser.Name = model.Name;

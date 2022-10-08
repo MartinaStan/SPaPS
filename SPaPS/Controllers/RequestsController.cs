@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using NuGet.Common;
 using SPaPS.Data;
 using SPaPS.Models;
+using NuGet.Protocol.Plugins;
+using Microsoft.Data.SqlClient;
 
 namespace SPaPS.Controllers
 {
@@ -102,19 +104,17 @@ namespace SPaPS.Controllers
                                     .Distinct()
                                     .ToList();
 
-
-
-
             foreach (var item in clientIds)
             {
-
                 var client = _context.Clients.Find(item);
                 var user = await _userManager.FindByIdAsync(client.UserId);
+                var requestId = request.RequestId;
 
-                //var callback = Url.Action(action: "Edit", controller: "Requests", values: new {request, email = user.Email }, HttpContext.Request.Scheme);
+                var callback = Url.Action(action: "Edit", controller: "Requests", new { id = requestId }, HttpContext.Request.Scheme);
+
                 //var user = await _userManager.GetUsersInRoleAsync("Изведувач");
                 //var userR = await _roleManager.FindByNameAsync("Изведувач");
-                //if (await _userManager.IsInRoleAsync(user, "Изведувач")) { 
+                 
                 if (await _userManager.IsInRoleAsync(user, "Изведувач"))
                 {
                     EmailSetUp emailSetUp = new EmailSetUp()
@@ -122,6 +122,7 @@ namespace SPaPS.Controllers
                         To = user.Email,
                         Template = "NewRequest",
                         RequestPath = _emailService.PostalRequest(Request),
+                        Callback = callback
                     };
 
                     await _emailService.SendEmailAsync(emailSetUp);
@@ -161,6 +162,12 @@ namespace SPaPS.Controllers
             {
                 return NotFound();
             }
+
+            //var loggedInUserEmail = User.Identity.Name;
+            //var appUser = await _userManager.FindByEmailAsync(loggedInUserEmail);
+            //var clientUser = await _context.Clients.Where(x => x.UserId == appUser.Id).FirstOrDefaultAsync();
+            //var requestIds = await _context.Requests.Where(x => x.RequestId == request.ServiceId).ToListAsync();
+
 
             if (ModelState.IsValid)
             {
