@@ -163,11 +163,24 @@ namespace SPaPS.Controllers
                 return NotFound();
             }
 
-            //var loggedInUserEmail = User.Identity.Name;
-            //var appUser = await _userManager.FindByEmailAsync(loggedInUserEmail);
-            //var clientUser = await _context.Clients.Where(x => x.UserId == appUser.Id).FirstOrDefaultAsync();
-            //var requestIds = await _context.Requests.Where(x => x.RequestId == request.ServiceId).ToListAsync();
+            var loggedInUserEmail = User.Identity.Name;
+            var appUser = await _userManager.FindByEmailAsync(loggedInUserEmail);
+            var clientUser = await _context.Clients.Where(x => x.UserId == appUser.Id).FirstOrDefaultAsync();
+            var reqSerId =  _context.Services.Where(s => s.ServiceId == request.ServiceId);
 
+
+
+            request.RequestDate = DateTime.Now;
+            request.ContractorId = clientUser.ClientId;
+            
+            //request.BuildingTypeId = request.BuildingTypeId;
+            //request.BuildingSize = request.BuildingSize;
+            //request.FromDate = request.FromDate;
+            //request.ToDate = request.ToDate;
+            request.CreatedOn = DateTime.Now;
+            request.CreatedBy = 1;
+            request.IsActive = true;
+            ViewData["ServiceId"] = new SelectList(_context.Services, "ServiceId", "ServiceId", request.ServiceId);
 
             if (ModelState.IsValid)
             {
@@ -189,7 +202,7 @@ namespace SPaPS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ServiceId"] = new SelectList(_context.Services, "ServiceId", "ServiceId", request.ServiceId);
+            
             return View(request);
         }
 

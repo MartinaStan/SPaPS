@@ -372,8 +372,6 @@ namespace SPaPS.Controllers
 
                 return View(model);
             }
-
-
             ModelState.AddModelError("Success", "Успешно променети информации");
 
             return View(model);
