@@ -12,7 +12,7 @@ using SPaPS.Models.CustomModels;
 
 namespace SPaPS.Controllers
 {
-    //[Authorize(Roles = "Админ")]
+    [Authorize(Roles = "Админ")]
     public class ServicesController : Controller
     {
         private readonly SPaPSContext _context;
@@ -123,6 +123,7 @@ namespace SPaPS.Controllers
         {
             var service = await _context.Services.FindAsync(id);
             var serviceActivities =  await _context.ServiceActivities.Where(x => x.ServiceId == service.ServiceId).Select(x => x.ActivityId).ToListAsync();
+
             ViewBag.ServiceActivities = new SelectList(_context.ServiceActivities.ToList(), "ActivityId", "Description");
 
             if (id == null || _context.Services == null)

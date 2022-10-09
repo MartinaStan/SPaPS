@@ -134,9 +134,6 @@ namespace SPaPS.Controllers
             //await _context.ClientActivities.AddAsync(clientActivity);
             //await _context.SaveChangesAsync();
 
-
-
-
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
             var callback = Url.Action(action: "ResetPassword", controller: "Account", values: new { token, email = user.Email }, HttpContext.Request.Scheme);

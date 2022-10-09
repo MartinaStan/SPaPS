@@ -16,7 +16,7 @@ using Microsoft.Data.SqlClient;
 
 namespace SPaPS.Controllers
 {
-    //[Authorize(Roles = "Корисник")]
+    [Authorize(Roles = "Корисник")]
     public class RequestsController : Controller
     {
         private readonly SPaPSContext _context;
@@ -111,9 +111,6 @@ namespace SPaPS.Controllers
                 var requestId = request.RequestId;
 
                 var callback = Url.Action(action: "Edit", controller: "Requests", new { id = requestId }, HttpContext.Request.Scheme);
-
-                //var user = await _userManager.GetUsersInRoleAsync("Изведувач");
-                //var userR = await _roleManager.FindByNameAsync("Изведувач");
                  
                 if (await _userManager.IsInRoleAsync(user, "Изведувач"))
                 {
@@ -147,7 +144,8 @@ namespace SPaPS.Controllers
             {
                 return NotFound();
             }
-            ViewData["ServiceId"] = new SelectList(_context.Services, "ServiceId", "ServiceId", request.ServiceId);
+            ViewData["ServiceId"] = new SelectList(_context.Services, "ServiceId", "Description", request.ServiceId);
+            ViewData["BuildingTypes"] = new SelectList(_context.References.Where(x => x.ReferenceTypeId == 5).ToList(), "ReferenceId", "Description");
             return View(request);
         }
 
@@ -166,21 +164,15 @@ namespace SPaPS.Controllers
             var loggedInUserEmail = User.Identity.Name;
             var appUser = await _userManager.FindByEmailAsync(loggedInUserEmail);
             var clientUser = await _context.Clients.Where(x => x.UserId == appUser.Id).FirstOrDefaultAsync();
-            var reqSerId =  _context.Services.Where(s => s.ServiceId == request.ServiceId);
-
-
-
-            request.RequestDate = DateTime.Now;
-            request.ContractorId = clientUser.ClientId;
+            //var serviceId =   _context.Services.Where(s => s.ServiceId == request.ServiceId);
             
-            //request.BuildingTypeId = request.BuildingTypeId;
-            //request.BuildingSize = request.BuildingSize;
-            //request.FromDate = request.FromDate;
-            //request.ToDate = request.ToDate;
+            request.ContractorId = clientUser.ClientId;
+            //request.ServiceId = request.ServiceId;
+            request.RequestDate = DateTime.Now;
             request.CreatedOn = DateTime.Now;
             request.CreatedBy = 1;
             request.IsActive = true;
-            ViewData["ServiceId"] = new SelectList(_context.Services, "ServiceId", "ServiceId", request.ServiceId);
+           
 
             if (ModelState.IsValid)
             {
@@ -202,7 +194,8 @@ namespace SPaPS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            
+            ViewData["ServiceId"] = new SelectList(_context.Services, "ServiceId", "ServiceId", request.ServiceId);
+
             return View(request);
         }
 

@@ -51,11 +51,23 @@ namespace SPaPS.Models
 
         [DisplayName("Забелешка:")]
         public string? Note { get; set; }
+
+        [DisplayName("Забелешка:")]
         public DateTime CreatedOn { get; set; }
+
+        [DisplayName("Забелешка:")]
         public int CreatedBy { get; set; }
+
+        [DisplayName("Ажуриран на:")]
         public DateTime? UpdatedOn { get; set; }
+
+        [DisplayName("Ажуриран од:")]
         public int? UpdatedBy { get; set; }
+
+        [DisplayName("Активен:")]
         public bool? IsActive { get; set; }
+
+        [DisplayName("Сервис")]
 
         public virtual Service? Service { get; set; } = null!;
     }

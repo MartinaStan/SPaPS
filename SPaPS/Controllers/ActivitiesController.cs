@@ -12,7 +12,7 @@ using SPaPS.Models;
 
 namespace SPaPS.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class ActivitiesController : Controller
     {
         private readonly SPaPSContext _context;
